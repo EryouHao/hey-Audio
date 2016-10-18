@@ -9,7 +9,7 @@
 <body class="blueHour">
 	
 	<audio id="audio">
-		<source title="我想" src="http://oc1475jft.bkt.clouddn.com/woxiang.mp3">
+		<source title="我想" src="http://link.hhtjim.com/163/431357712.mp3">
 		<source title="白昼之夜" src="http://oc1475jft.bkt.clouddn.com/baizhouzhiye.mp3">
 		<source title="告白气球" src="http://oc1475jft.bkt.clouddn.com/gaobaiqiqiu.mp3">
 	</audio>
@@ -18,18 +18,23 @@
 			<h1>hey-Audio <small>音乐播放器</small></h1>
 		</div>
 		<div class="fengmian">
-			<img src="img/music.png" alt="">
+			<img src="img/music.png" id="music-img" alt="">
 		</div>
 		<div id="title">
 			hey-Audio
 		</div>
 		<div class="jindu">
 			<span id="music-bar">
+				<span id="load-bar"></span>
 				<span id="played-bar"></span>
 			</span>
 			<span id="voice-bar">
 				<span id="voiced-bar"></span>
 			</span>
+			<div id="time">
+				<span id="current-time">0:00</span>
+				<span id="total-time"></span>
+			</div>
 		</div>
 		<div class="controls">
 			<a id="prev" href="javascript:;"><</a>

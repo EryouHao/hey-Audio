@@ -1,4 +1,5 @@
 window.onload = function () {
+
 	var audio = document.getElementById('audio'); // 音乐
 	var sourceList = audio.getElementsByTagName('source'); // 音乐列表
 	var play = document.getElementById('play'); // 播放按钮
@@ -10,6 +11,10 @@ window.onload = function () {
 	var playedBar = document.getElementById('played-bar'); // 已播放进度条
 	var voicedBar = document.getElementById('voiced-bar'); // 已播放进度条
 	var musicTitle = document.getElementById('title'); // 音乐标题
+	var loadBar = document.getElementById('load-bar'); // 加载进度条
+	var currentTime = document.getElementById('current-time'); // 当前音乐时间
+	var totalTime = document.getElementById('total-time'); // 当前音乐时间
+	var musicImg = document.getElementById('music-img');
 	var currentSrcIndex = 0;
 
 
@@ -17,7 +22,7 @@ window.onload = function () {
 	audio.loop = true;
 
 	// 自动播放
-	audio.autoplay = true;
+	audio.autoplay = false;
 
 	// 设置音量
 	audio.volume = 0.5;
@@ -27,22 +32,32 @@ window.onload = function () {
 	// 缓冲加载
 	audio.autobuffer = false;
 
+	// 显示时长
+	(function () {
+		var fen = parseInt(audio.duration / 60);
+		var miao = parseInt(audio.duration % 60);
+		if (miao < 10) {
+			miao = '0'+miao;
+		}
+		totalTime.innerHTML = fen + ':' + miao;
+	})();
+	
+
 	// 播放 暂停
 	play.onclick = function () {
 		if (audio.paused) {
 			audio.play();
 			this.innerHTML = 'Pause';
+			musicImg.style.animation = 'xuanzhuan 3s linear infinite';
+
 		} else {
 			audio.pause();
 			this.innerHTML = 'Play';
+			musicImg.removeAttribute('style');
 		}
 
 		musicTitle.innerHTML = sourceList[currentSrcIndex].title;
-		
-		var fen = parseInt(audio.duration / 60);
-		var miao = parseInt(audio.duration % 60);
-		console.log(fen + ':' + miao); // 播放文件总时长 以3:46的形式显示
-		console.log(audio.currentSrc);
+		musicTime();
 	};
 
 	// 下一曲
@@ -51,7 +66,9 @@ window.onload = function () {
 		currentSrc = sourceList[currentSrcIndex].getAttribute('src');
 		audio.setAttribute('src', currentSrc);
 		audio.play();
+		play.innerHTML = 'Pause';
 		musicTitle.innerHTML = sourceList[currentSrcIndex].title;
+		musicTime();
 	};
 
 	// 上一曲
@@ -60,7 +77,9 @@ window.onload = function () {
 		currentSrc = sourceList[currentSrcIndex].getAttribute('src');
 		audio.setAttribute('src', currentSrc);
 		audio.play();
+		play.innerHTML = 'Pause';
 		musicTitle.innerHTML = sourceList[currentSrcIndex].title;
+		musicTime();
 	};
 
 	// 音量调节（增加黄色现在音量显示）
@@ -91,15 +110,12 @@ window.onload = function () {
 		var musicBarWidth = musicBar.clientWidth;
 		var playedBarWidth = (audio.currentTime / audio.duration) * musicBarWidth;
 		playedBar.style.width = playedBarWidth + 'px';
+		if (audio.currentTime % 60 < 10) {
+			currentTime.innerHTML = parseInt(audio.currentTime / 60) + ':0' + parseInt(audio.currentTime % 60);
+		} else {
+			currentTime.innerHTML = parseInt(audio.currentTime / 60) + ':' + parseInt(audio.currentTime % 60);
+		}
 	}, 1000);
-
-
-
-	// pause.onclick = function () {
-	// 	audio.pause();
-	// 	console.log(parseInt(audio.currentTime)); // 返回从开始播放到现在所用的时间
-	// 	console.log(audio.paused);
-	// }
 
 	// 静音
 	jingyin.onclick = function () {
@@ -109,7 +125,40 @@ window.onload = function () {
 		}else {
 			audio.muted = false;
 		}
-	}
+	};
+
+	// 判断文件缓冲进度
+	setInterval(function updateCache () {
+		var buffered, percent;
+		console.log('执行缓冲');
+		// 已缓冲部分
+		audio.readyState == 4 && (buffered = audio.buffered.end(0));
+
+		// 已缓冲百分百
+		audio.readyState == 4 && (percent = Math.round(buffered / audio.duration * 100) + '%');
+		loadBar.style.width = (Math.round(buffered / audio.duration * 100) * musicBar.clientWidth * 0.01) + 'px';
+		console.log(Math.round(buffered / audio.duration * 100));
+		console.log(percent);
+	}, 1000);
+
+	// 计算音乐时间
+
+	function musicTime() {
+		// 播放时间显示
+		audio.addEventListener("canplay", function(){
+			var sc=audio.duration;
+
+			var fen = parseInt(sc / 60);
+			var miao = parseInt(sc % 60);
+			console.log('秒为====' + miao);
+			if (miao < 10) {
+				totalTime.innerHTML = fen + ':0' + miao;
+			}else {
+				totalTime.innerHTML = fen + ':' + miao;
+			}
+		});
+	};
+
 };
 
 

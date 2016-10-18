@@ -32,7 +32,7 @@ a {
 }
 .fengmian {
 	height: 260px;
-	border-bottom: 1px solid #fec514;
+	/*border-bottom: 1px solid #fec514;*/
 	position: relative;
 }
 .fengmian img {
@@ -41,40 +41,78 @@ a {
 	top: 50%;
 	margin-left: -64px;
 	margin-top: -64px;
+	/*animation: xuanzhuan 3s linear infinite;*/
 }
 #title {
 	text-align: center;
 	height: 40px;
 	line-height: 40px;
-	border-bottom: 1px solid #fec514;
+	/*border-bottom: 1px solid #fec514;*/
 }
 .jindu {
 	padding-top: 5px;
 	height: 25px;
-	border-bottom: 1px solid #fec514;
+	/*border-bottom: 1px solid #fec514;*/
 }
 #music-bar {
 	display: inline-block;
 	width: 218px;
-	height: 8px;
+	height: 4px;
 	background: #ccc;
 	margin-right: 7px;
 	border-radius: 4px;
 	margin-left: 5px;
+	position: relative;
 }
 #voice-bar {
 	display: inline-block;
 	width: 80px;
-	height: 8px;
+	height: 4px;
 	background: #ccc;
 	border-radius: 4px;
+	position: relative;
 }
 #played-bar, #voiced-bar {
     display: inline-block;
-    height: 8px;
+    height: 4px;
     float: left;
     border-radius: 4px;
     background: #fec514;
+    position: absolute;
+    z-index: 2;
+    transition: all 0.5s;
+}
+#played-bar:after, #voiced-bar:after {
+	content: '';
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute;
+	right: -2px;
+	top: -2px;
+}
+#load-bar {
+	display: inline-block;
+	height: 4px;
+	float: left;
+	border-radius: 4px;
+	background: #fff;
+	position: absolute;
+	z-index: 1;
+	transition: all 3s; /* 进度加载动画 */
+}
+#time {
+    width: 216px;
+	font-size: 12px;
+    overflow: hidden;
+    padding: 3px 0 0 6px;
+}
+#time span:nth-child(1) {
+	float: left;
+}
+#time span:nth-child(2) {
+	float: right;
 }
 .controls {
 	padding-top: 20px;
@@ -98,3 +136,15 @@ a {
   background: -webkit-linear-gradient(left, #7E898F 0%, #636C75 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
   background: linear-gradient(90deg, #7E898F 0%, #636C75 100%), radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
   background-blend-mode: multiply, screen; }
+
+@keyframes xuanzhuan {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
