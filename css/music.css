@@ -4,19 +4,24 @@
 }
 html,body {
 	height: 100%;
-	font-weight: lighter;
-	font-size: 16px;
+	font: lighter 16px '微软雅黑';
+	margin: 0;
+	padding: 0;
 }
 a {
 	text-decoration: none;
 	color: #fff;
 }
+.container {
+	overflow: hidden;
+	width: 1020px;
+	margin: 0 auto;
+	padding-top: 120px;
+}
 .music {
 	width: 320px;
 	height: 470px;
-	position: absolute;
-	right: 100px;
-	top: 100px;
+	float: left;
 	background: rgba(0,0,0,0.3);
 	color: #fff;
 	border-radius: 3px;
@@ -29,10 +34,10 @@ a {
 }
 .header h1 {
 	font-size: 24px;
+	color: #a2a2a2;
 }
 .fengmian {
 	height: 260px;
-	/*border-bottom: 1px solid #fec514;*/
 	position: relative;
 }
 .fengmian img {
@@ -41,24 +46,21 @@ a {
 	top: 50%;
 	margin-left: -64px;
 	margin-top: -64px;
-	/*animation: xuanzhuan 3s linear infinite;*/
 }
 #title {
 	text-align: center;
 	height: 40px;
 	line-height: 40px;
-	/*border-bottom: 1px solid #fec514;*/
 }
 .jindu {
 	padding-top: 5px;
 	height: 25px;
-	/*border-bottom: 1px solid #fec514;*/
 }
 #music-bar {
 	display: inline-block;
 	width: 218px;
 	height: 4px;
-	background: #ccc;
+	background: #6d6d6d;
 	margin-right: 7px;
 	border-radius: 4px;
 	margin-left: 5px;
@@ -68,7 +70,7 @@ a {
 	display: inline-block;
 	width: 80px;
 	height: 4px;
-	background: #ccc;
+	background: #6d6d6d;
 	border-radius: 4px;
 	position: relative;
 }
@@ -77,7 +79,7 @@ a {
     height: 4px;
     float: left;
     border-radius: 4px;
-    background: #fec514;
+    background: -webkit-linear-gradient(left, #fec514, #EE4000);
     position: absolute;
     z-index: 2;
     transition: all 0.5s;
@@ -97,7 +99,7 @@ a {
 	height: 4px;
 	float: left;
 	border-radius: 4px;
-	background: #fff;
+	background: #a2a2a2;
 	position: absolute;
 	z-index: 1;
 	transition: all 3s; /* 进度加载动画 */
@@ -116,11 +118,10 @@ a {
 }
 .controls {
 	padding-top: 20px;
-	padding-left: 20px;
+	text-align: center;
 }
 .controls a {
-	display: block;
-	float: left;
+	display: inline-block;
 	color: #000;
 	width: 50px;
 	height: 50px;
@@ -130,7 +131,50 @@ a {
 	border-radius: 50%;
 	background: #fec514;
 }
+#play {
+	font-size: 14px;
+}
+#prev, #next {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background: transparent;
+	color: #fec514;
+	border: 2px solid #fec514;
+}
+#xunhuan, #jingyin {
+	width: 30px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 12px;
+	background: transparent;
+	color: #fec514;
+	margin: 0 20px;
+}
 
+
+/* 歌单部分 */
+.music-list {
+	width: 680px;
+	height: 470px;
+	margin-right: 20px;
+	float: left;
+	color: #2a2a2a;
+}
+.music-list .title {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 22px;
+}
+.music-list .list {
+	padding: 20px;
+}
+.music-list .list li {
+	display: block;
+	line-height: 30px;
+	border-bottom: 1px dotted #33383b;
+}
 /* 渐变质感背景 */
 .blueHour {
   background: -webkit-linear-gradient(left, #7E898F 0%, #636C75 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
@@ -146,5 +190,55 @@ a {
 	}
 	100% {
 		transform: rotate(360deg);
+	}
+}
+
+/* 响应式 */
+@media screen and (max-width: 450px){
+	body {
+		background: #fff;
+	}
+	.container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+	.music-list {
+		display: none;
+	}
+	.music {
+		width: 100%;
+		height: 100%;
+	}
+	.controls {
+		position: absolute;
+		bottom: 10px;
+		left: 0;
+	}
+	#music-bar {
+		width: 70%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	#voice-bar {
+		width: 15%;
+	}
+	#time {
+		width: 70%;
+		margin-left: 5%;
+		margin-right: 5%;
+		padding-left: 0;
+	}
+	.jindu {
+		position: absolute;
+	    bottom: 80px;
+	    left: 0;
+	    width: 100%;
+	}
+	#title {
+		position: absolute;
+	    bottom: 110px;
+	    left: 0;
+	    width: 100%;
 	}
 }

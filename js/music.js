@@ -15,11 +15,12 @@ window.onload = function () {
 	var currentTime = document.getElementById('current-time'); // 当前音乐时间
 	var totalTime = document.getElementById('total-time'); // 当前音乐时间
 	var musicImg = document.getElementById('music-img');
+	var xunhuan = document.getElementById('xunhuan'); // 循环按钮
 	var currentSrcIndex = 0;
 
 
 	// 是否循环播放 
-	audio.loop = true;
+	audio.loop = false;
 
 	// 自动播放
 	audio.autoplay = false;
@@ -101,6 +102,8 @@ window.onload = function () {
 		audio.currentTime = newCurrentTime;
 		var playedBarWidth = (audio.currentTime / audio.duration) * musicBarWidth;
 		playedBar.style.width = playedBarWidth + 'px';
+
+		// 增加自动下一曲功能！！！！
 	};
 
 	// 播放进度实时更新(修改为歌曲播放时开启定时器，暂停和页面load时清除定时器)
@@ -115,15 +118,24 @@ window.onload = function () {
 		} else {
 			currentTime.innerHTML = parseInt(audio.currentTime / 60) + ':' + parseInt(audio.currentTime % 60);
 		}
+		//如果是时间结束，并且是非单曲循环
+		if (audio.currentTime === audio.duration && !audio.loop) {
+			next.onclick();
+		}
 	}, 1000);
 
 	// 静音
 	jingyin.onclick = function () {
-		console.log('点击了静音');
 		if (!audio.muted) {
 			audio.muted = true;
+			voicedBar.style.width = 0 +'px';
 		}else {
 			audio.muted = false;
+			var voiceBarWidth = voiceBar.clientWidth;
+
+			// 音量大小更新
+			var voicedBarWidth = (audio.volume / 1) * voiceBarWidth;
+			voicedBar.style.width = voicedBarWidth + 'px';
 		}
 	};
 
@@ -157,6 +169,17 @@ window.onload = function () {
 				totalTime.innerHTML = fen + ':' + miao;
 			}
 		});
+	};
+
+	// 是否单曲循环
+	xunhuan.onclick = function () {
+		if (audio.loop) {
+			audio.loop = false;
+			this.innerHTML = '循环';
+		} else {
+			audio.loop = true;
+			this.innerHTML = '单曲';
+		}
 	};
 
 };
