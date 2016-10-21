@@ -25,6 +25,12 @@ window.onload = function () {
 	 	xunhuan = document.getElementById('xunhuan'); // 循环按钮
 	 	currentSrcIndex = 0;
 
+	 	// 网易云音乐模块
+		var keyword = document.getElementById('keyword'); // 搜索歌名
+		var searchBtn = document.getElementById('search-btn'); // 搜索按钮
+		var result = document.getElementById('result'); // 结果区
+		var toPlay = document.getElementById('to-play'); // 立即播放按钮
+
 
 	// 是否循环播放 
 	audio.loop = false;
@@ -56,7 +62,7 @@ window.onload = function () {
 		if (audio.paused) {
 			audio.play();
 			this.innerHTML = 'Pause';
-			musicImg.style.animation = 'xuanzhuan 3s linear infinite';
+			musicImg.style.animation = 'xuanzhuan 5s linear infinite';
 		} else {
 			audio.pause();
 			this.innerHTML = 'Play';
@@ -83,6 +89,8 @@ window.onload = function () {
 			-- currentSrcIndex < 0 && (currentSrcIndex = sourceList.length -1); // 上一曲
 		}
 		currentSrc = sourceList[currentSrcIndex].getAttribute('src');
+		currentImg = sourceList[currentSrcIndex].getAttribute('data-img')
+		musicImg.setAttribute('src', currentImg);
 		audio.setAttribute('src', currentSrc);
 		audio.play();
 		play.innerHTML = 'Pause';
@@ -182,8 +190,67 @@ window.onload = function () {
 		}
 	};
 
+	var toPlay = document.getElementById('to-play'); // 立即播放按钮
+	var result = document.getElementById('result'); // 结果区
+
+	// 利用委托来为立即播放绑定事件
+	result.addEventListener('click', function (ev) {
+		var t = ev.target || ev.srcElement;
+		if (t.tagName === 'A') {
+			var oMusicSrc = result.getAttribute('data-audio');
+			var oMusicImg = result.getAttribute('data-img');
+			var oMusicName = result.getAttribute('data-music');
+			var oSinger = result.getAttribute('data-singer');
+			musicImg.setAttribute('src',oMusicImg);
+			musicTitle.innerHTML = oMusicName + '-' + oSinger;
+			audio.setAttribute('src', oMusicSrc);
+			audio.play();
+			play.innerHTML = 'Pause';
+			musicImg.style.animation = 'xuanzhuan 5s linear infinite';
+		}
+
+	});
+
+	// 搜索按钮
+	searchBtn.addEventListener('click', function () {
+		var value = keyword.value;
+		if (!value) {
+			alert('关键词不能为空');
+			return;
+		}
+		var url = "http://s.music.163.com/search/get/";
+		var data = {
+			"type": 1,
+			"limit": 1,
+			"s": value,
+			"callback": "jsonpcallback"
+		};
+		var buffer = [];
+		for (var key in data) {
+			buffer.push(key + '=' + encodeURIComponent(data[key]));
+		}
+		var fullpath = url + '?' + buffer.join('&');
+		CreateScript(fullpath);
+	});
+
+	function CreateScript (src) {
+		var el = document.createElement('script');
+		el.src = src;
+		el.async = true;
+		el.defer = true;
+		document.body.appendChild(el);
+	};
+	
 };
 
+
+			
+
+
+
+
+
+		
 
 
 

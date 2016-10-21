@@ -16,7 +16,7 @@ a {
 	overflow: hidden;
 	width: 1020px;
 	margin: 0 auto;
-	padding-top: 120px;
+	padding-top: 20px;
 }
 .music {
 	width: 320px;
@@ -46,6 +46,9 @@ a {
 	top: 50%;
 	margin-left: -64px;
 	margin-top: -64px;
+	width: 128px;
+	height: 128px;
+	border-radius: 50%;
 }
 #title {
 	text-align: center;
@@ -134,6 +137,10 @@ a {
 }
 #play {
 	font-size: 14px;
+	transition: all 0.3s;
+}
+#play:hover {
+	background: rgba(254,197,20,0.7);
 }
 #prev, #next {
 	width: 30px;
@@ -142,6 +149,10 @@ a {
 	background: transparent;
 	color: #fec514;
 	border: 2px solid #fec514;
+	transition: all 0.3s;
+}
+#prev:hover, #next:hover {
+	border-color: rgba(254,197,20,0.7);
 }
 #xunhuan, #jingyin {
 	width: 30px;
@@ -160,7 +171,7 @@ a {
 	height: 470px;
 	margin-right: 20px;
 	float: left;
-	color: #2a2a2a;
+	color: #ccc;
 }
 .music-list .title {
 	height: 40px;
@@ -174,8 +185,65 @@ a {
 .music-list .list li {
 	display: block;
 	line-height: 30px;
-	border-bottom: 1px dotted #33383b;
+	border-bottom: 1px dotted #ccc;
 }
+/* 搜索部分 */
+.search {
+	height: 100px;
+	margin: 0 auto;
+	width: 1020px;
+	color: #ccc;
+	position: relative;
+}
+#keyword {
+	width: 260px;
+	height: 35px;
+	line-height: 35px;
+	border: 1px solid #ccc;
+	color: #ccc;
+	padding: 0 10px;
+	border-radius: 20px;
+	background: transparent;
+	outline: none;
+	font-size: 14px;
+	position: absolute;
+	top: 30px;
+	left: 10px;
+}
+#search-btn {
+	display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 0 10px;
+    border-radius: 0 20px 20px 0;
+    position: absolute;
+    top: 30px;
+    left: 186px;
+}
+#result {
+	display: inline-block;
+    border: 1px dashed #ccc;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.7s;
+    position: absolute;
+    top: 30px;
+    left: 320px;
+}
+#result strong {
+	font-weight: normal;
+	margin-right: 20px;
+}
+#to-play {
+	color: #fec514;
+}
+
 /* 渐变质感背景 */
 .blueHour {
   background: -webkit-linear-gradient(left, #7E898F 0%, #636C75 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
@@ -204,7 +272,7 @@ a {
 		height: 100%;
 		padding: 0;
 	}
-	.music-list {
+	.music-list, #footer {
 		display: none;
 	}
 	.music {
@@ -244,7 +312,39 @@ a {
 	    left: 0;
 	    width: 100%;
 	}
+	.search {
+		width: 100%;
+		position: absolute;
+		bottom: 170px;
+
+	}
+	#result {
+		padding: 0 5%;
+		width: 80%;
+		left: auto;
+		right: 5%;
+		top: 75px;
+		transition: all 0.2s;
+	}
+	#keyword {
+		width: 80%;
+		padding: 0 5%;
+		left: auto;
+		right: 5%;
+	}
+	#search-btn {
+		left: auto;
+		right: 5%;
+	}
+	.fengmian img {
+		left: 25%;
+		top: 50%;
+		width: 50%;
+		height: auto;
+		margin: 0;
+	}
 }
+
 
 /* 无关紧要 */
 #footer {
