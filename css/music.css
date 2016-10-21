@@ -245,3 +245,22 @@ a {
 	    width: 100%;
 	}
 }
+
+/* 无关紧要 */
+#footer {
+	position: fixed;
+	right: 5px;
+	top: 10px;
+}
+#footer a {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 17px;
+	color: #afafaf;
+	border: 1px solid #afafaf;
+	transition: all .3s;
+}
+#footer a:hover {
+	background: #afafaf;
+	color: #000;
+}
