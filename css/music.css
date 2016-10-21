@@ -4,7 +4,7 @@
 }
 html,body {
 	height: 100%;
-	font: lighter 16px '微软雅黑';
+	font: lighter 16px -apple-system,PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Helvetica Neue,sans-serif;
 	margin: 0;
 	padding: 0;
 }
@@ -80,6 +80,7 @@ a {
     float: left;
     border-radius: 4px;
     background: -webkit-linear-gradient(left, #fec514, #EE4000);
+    background: linear-gradient(left, #fec514, #EE4000);
     position: absolute;
     z-index: 2;
     transition: all 0.5s;
