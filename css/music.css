@@ -1,0 +1,366 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html,body {
+	height: 100%;
+	font: lighter 16px -apple-system,PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Helvetica Neue,sans-serif;
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	color: #fff;
+}
+.container {
+	overflow: hidden;
+	width: 1020px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+.music {
+	width: 320px;
+	height: 470px;
+	float: left;
+	background: rgba(0,0,0,0.3);
+	color: #fff;
+	border-radius: 3px;
+}
+.header {
+	height: 60px;
+	text-align: center;
+	line-height: 60px;
+	border-bottom: 1px solid #fec514;
+}
+.header h1 {
+	font-size: 24px;
+	color: #a2a2a2;
+}
+.fengmian {
+	height: 260px;
+	position: relative;
+}
+.fengmian img {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -64px;
+	margin-top: -64px;
+	width: 128px;
+	height: 128px;
+	border-radius: 50%;
+}
+#title {
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+}
+.jindu {
+	padding-top: 5px;
+	height: 25px;
+}
+#music-bar {
+	display: inline-block;
+	width: 218px;
+	height: 4px;
+	background: #6d6d6d;
+	margin-right: 7px;
+	border-radius: 4px;
+	margin-left: 5px;
+	position: relative;
+}
+#voice-bar {
+	display: inline-block;
+	width: 80px;
+	height: 4px;
+	background: #6d6d6d;
+	border-radius: 4px;
+	position: relative;
+}
+#played-bar, #voiced-bar {
+    display: inline-block;
+    height: 4px;
+    float: left;
+    border-radius: 4px;
+    background: -webkit-linear-gradient(left, #fec514, #EE4000);
+    background: linear-gradient(left, #fec514, #EE4000);
+    position: absolute;
+    z-index: 2;
+    transition: all 0.5s;
+}
+#played-bar:after, #voiced-bar:after {
+	content: '';
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute;
+	right: -2px;
+	top: -2px;
+}
+#load-bar {
+	display: inline-block;
+	height: 4px;
+	float: left;
+	border-radius: 4px;
+	background: #a2a2a2;
+	position: absolute;
+	z-index: 1;
+	transition: all 3s; /* 进度加载动画 */
+}
+#time {
+    width: 216px;
+	font-size: 12px;
+    overflow: hidden;
+    padding: 3px 0 0 6px;
+}
+#time span:nth-child(1) {
+	float: left;
+}
+#time span:nth-child(2) {
+	float: right;
+}
+.controls {
+	padding-top: 20px;
+	text-align: center;
+}
+.controls a {
+	display: inline-block;
+	color: #000;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	margin-right: 5px;
+	border-radius: 50%;
+	background: #fec514;
+}
+#play {
+	font-size: 14px;
+	transition: all 0.3s;
+}
+#play:hover {
+	background: rgba(254,197,20,0.7);
+}
+#prev, #next {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background: transparent;
+	color: #fec514;
+	border: 2px solid #fec514;
+	transition: all 0.3s;
+}
+#prev:hover, #next:hover {
+	border-color: rgba(254,197,20,0.7);
+}
+#xunhuan, #jingyin {
+	width: 30px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 12px;
+	background: transparent;
+	color: #fec514;
+	margin: 0 20px;
+}
+
+
+/* 歌单部分 */
+.music-list {
+	width: 680px;
+	height: 470px;
+	margin-right: 20px;
+	float: left;
+	color: #ccc;
+}
+.music-list .title {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 22px;
+}
+.music-list .list {
+	padding: 20px;
+}
+.music-list .list li {
+	display: block;
+	line-height: 30px;
+	border-bottom: 1px dotted #ccc;
+}
+/* 搜索部分 */
+.search {
+	height: 100px;
+	margin: 0 auto;
+	width: 1020px;
+	color: #ccc;
+	position: relative;
+}
+#keyword {
+	width: 260px;
+	height: 35px;
+	line-height: 35px;
+	border: 1px solid #ccc;
+	color: #ccc;
+	padding: 0 10px;
+	border-radius: 20px;
+	background: transparent;
+	outline: none;
+	font-size: 14px;
+	position: absolute;
+	top: 30px;
+	left: 10px;
+}
+#search-btn {
+	display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    padding: 0 10px;
+    border-radius: 0 20px 20px 0;
+    position: absolute;
+    top: 30px;
+    left: 186px;
+}
+#result {
+	display: inline-block;
+    border: 1px dashed #ccc;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.7s;
+    position: absolute;
+    top: 30px;
+    left: 320px;
+}
+#result strong {
+	font-weight: normal;
+	margin-right: 20px;
+}
+#to-play {
+	color: #fec514;
+}
+
+/* 渐变质感背景 */
+.blueHour {
+  background: -webkit-linear-gradient(left, #7E898F 0%, #636C75 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), -webkit-radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
+  background: linear-gradient(90deg, #7E898F 0%, #636C75 100%), radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.55) 100%), radial-gradient(at top, rgba(255, 255, 255, 0.5) 0%, rgba(0, 0, 0, 0.08) 63%);
+  background-blend-mode: multiply, screen; }
+
+@keyframes xuanzhuan {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* 响应式 */
+@media screen and (max-width: 450px){
+	body {
+		background: #fff;
+	}
+	.container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+	.music-list, #footer {
+		display: none;
+	}
+	.music {
+		width: 100%;
+		height: 100%;
+	}
+	.controls {
+		position: absolute;
+		bottom: 10px;
+		left: 0;
+		width: 100%;
+		text-align: center;
+	}
+	#music-bar {
+		width: 70%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	#voice-bar {
+		width: 15%;
+	}
+	#time {
+		width: 70%;
+		margin-left: 5%;
+		margin-right: 5%;
+		padding-left: 0;
+	}
+	.jindu {
+		position: absolute;
+	    bottom: 80px;
+	    left: 0;
+	    width: 100%;
+	}
+	#title {
+		position: absolute;
+	    bottom: 110px;
+	    left: 0;
+	    width: 100%;
+	}
+	.search {
+		width: 100%;
+		position: absolute;
+		bottom: 170px;
+
+	}
+	#result {
+		padding: 0 5%;
+		width: 80%;
+		left: auto;
+		right: 5%;
+		top: 75px;
+		transition: all 0.2s;
+	}
+	#keyword {
+		width: 80%;
+		padding: 0 5%;
+		left: auto;
+		right: 5%;
+	}
+	#search-btn {
+		left: auto;
+		right: 5%;
+	}
+	.fengmian img {
+		left: 25%;
+		top: 50%;
+		width: 50%;
+		height: auto;
+		margin: 0;
+	}
+}
+
+
+/* 无关紧要 */
+#footer {
+	position: fixed;
+	right: 5px;
+	top: 10px;
+}
+#footer a {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 17px;
+	color: #afafaf;
+	border: 1px solid #afafaf;
+	transition: all .3s;
+}
+#footer a:hover {
+	background: #afafaf;
+	color: #000;
+}
