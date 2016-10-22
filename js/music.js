@@ -94,6 +94,7 @@ window.onload = function () {
 		audio.setAttribute('src', currentSrc);
 		audio.play();
 		play.innerHTML = 'Pause';
+		musicImg.style.animation = 'xuanzhuan 5s linear infinite';
 		musicTime();
 	}
 
